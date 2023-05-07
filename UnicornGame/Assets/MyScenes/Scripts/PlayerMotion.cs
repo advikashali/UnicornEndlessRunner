@@ -12,9 +12,9 @@ public class PlayerMotion : MonoBehaviour
     /*
     private const float LANE_DISTANCE = 2.0f;
     private const float TURN_SPEED = 0.5f;
-   
-    public bool isRunning = false;
-    */
+   */
+    private bool isRunning = false;
+    
 
     // Animation
     private Animator _anim;
@@ -27,24 +27,38 @@ public class PlayerMotion : MonoBehaviour
     private int _desiredLane = 1; // 0 = Left, 1 = Middle, 2 = Right
 
     // Speed Modifier
-    //private float _originalSpeed = 7.0f;
+    private float _originalSpeed = 7.0f;
     private float _speed = 7.0f;
-   // private float _speedIncreaseLastTick;
-    //private float _speedIncreaseTime = 2.5f;
-   // private float _speedIncreaseAmount = 0.1f;
+    private float _speedIncreaseLastTick;
+    private float _speedIncreaseTime = 2.5f;
+    private float _speedIncreaseAmount = 0.1f;
 
 
     private void Start()
     {
         _controller = GetComponent<CharacterController>();
         _anim = GetComponent<Animator>();
-        //_speed = _originalSpeed;
+        _speed = _originalSpeed;
     }
 
     
     private void Update()
           // Gather input on which lane we should be
     {
+
+        if (!isRunning)
+            return;
+
+        if(Time.time - _speedIncreaseLastTick > _speedIncreaseTime)
+        {
+            _speedIncreaseLastTick = Time.time;
+            _speed += _speedIncreaseAmount;
+
+            GameManagerScript.Instance.UpdateModifier(_speed - _originalSpeed);
+        }
+
+
+
         if (MobileTouchInput.Instance.SwipeLeft)
                 MoveLane(false);
         if (MobileTouchInput.Instance.SwipeRight)
@@ -134,6 +148,33 @@ public class PlayerMotion : MonoBehaviour
 
         return Physics.Raycast(groundRay, 0.3f);
     }
+
+    public void StartRunning()
+    {
+        isRunning = true;
+        _anim.SetTrigger("StartRun");
+    }
+
+    private void _Crash()
+    {
+        _anim.SetTrigger("Death");
+        isRunning = false;
+    }
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        switch (hit.gameObject.tag)
+        {
+            case "Obstacle":
+                _Crash();
+                break;
+        }
+    }
+
+
+
+
+
 
     /*
     if (!isRunning)

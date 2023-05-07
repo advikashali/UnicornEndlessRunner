@@ -6,7 +6,7 @@ public class CameraMotion : MonoBehaviour
 {
 
     public Transform lookatTarget; //unicorn
-    public Vector3 offset = new Vector3(0f, -2f, -1f);
+    public Vector3 offset = new Vector3(0f, 5f, -10f);
 
     private void Start()
     {

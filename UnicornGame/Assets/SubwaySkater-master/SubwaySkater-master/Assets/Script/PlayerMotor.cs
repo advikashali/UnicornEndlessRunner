@@ -10,6 +10,7 @@ public class PlayerMotor : MonoBehaviour {
     private const float TURN_SPEED = 0.5f;
 
 	public bool isRunning = false;
+    //private bool isGameStarted = false;  
 
     // Animation
     private Animator _anim;
@@ -41,8 +42,11 @@ public class PlayerMotor : MonoBehaviour {
 		if (!isRunning)
 			return;
 
-		// speed modifier
-		if ((Time.time - _speedIncreaseLastTick) > _speedIncreaseTime) {
+       // if (!isGameStarted)
+            //return;
+
+        // speed modifier
+        if ((Time.time - _speedIncreaseLastTick) > _speedIncreaseTime) {
 			_speedIncreaseLastTick = Time.time;
 			_speed += _speedIncreaseAmount;
 			GameManager.Instance.UpdateModifier (_speed - _originalSpeed);
@@ -153,21 +157,23 @@ public class PlayerMotor : MonoBehaviour {
 	{
 		isRunning = true;
 		_anim.SetTrigger ("StartRunnig");
+
+        //isGameStarted = true;
 	}
 
-	private void _Crash()
-	{
-		_anim.SetTrigger ("Death");
-		isRunning = false;
-	}
+	//private void _Crash()
+	//{
+		//_anim.SetTrigger ("Death");
+		//isRunning = false;
+	//}
 
-	private void OnControllerColliderHit(ControllerColliderHit hit)
-	{
-		switch (hit.gameObject.tag) {
-		case "Obstacle":
-			_Crash ();
-			break;
-		}
-	}
+	//private void OnControllerColliderHit(ControllerColliderHit hit)
+	//{
+		//switch (hit.gameObject.tag) {
+		//case "Obstacle":
+			//_Crash ();
+			//break;
+		//}
+	//}
 }
 
