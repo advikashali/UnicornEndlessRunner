@@ -22,51 +22,48 @@ public class GameManagerScript : MonoBehaviour
         Instance = this;
         modifierScore = 1;
         motor = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMotion>();
-        UpdateScores();
+
+        modifierText.text = "x" + modifierScore.ToString("0.0");
+        starText.text = starScore.ToString("0");
+        scoreText.text = scoreText.text = score.ToString("0");
     }
 
     private void Update()
     {
-       if (MobileTouchInput.Instance.Tap && !isGameStarted)
+        if (MobileTouchInput.Instance.Tap && !isGameStarted)
         {
             isGameStarted = true;
             motor.StartRunning();
         }
 
-       if (isGameStarted)
+        if (isGameStarted)
         {
             //increase score
-            lastScore = (int)score; 
+            lastScore = (int)score;
             score += (Time.deltaTime * modifierScore);
 
-            if (lastScore == (int)score)
+            if (lastScore != (int)score)
             {
                 Debug.Log(lastScore);
                 scoreText.text = score.ToString("0");
             }
-            
+
         }
     }
 
     public void GetStar()
     {
-        starScore += STAR_SCORE_AMOUNT;
+        starScore++;
+        starText.text = starScore.ToString("0");
+        score += STAR_SCORE_AMOUNT;
         scoreText.text = scoreText.text = score.ToString("0");
-
-    }
-
-
-    public void UpdateScores()
-    {
-        scoreText.text = score.ToString();
-        starText.text = starScore.ToString();
-        modifierText.text = "x" + modifierScore.ToString("0.0");
 
     }
 
     public void UpdateModifier(float modifierAmount)
     {
         modifierScore = 1.0f + modifierAmount;
-        UpdateScores();
+
+        modifierText.text = "x" + modifierScore.ToString("0.0");
     }
 }
