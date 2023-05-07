@@ -21,7 +21,7 @@ public class PlayerMotion : MonoBehaviour
 
     // Movement
     private CharacterController _controller;
-    private float _jumpForce = 140.0f;
+    private float _jumpForce = 14.0f;
     private float _gravity = 12.0f;
     private float _verticalVelocity;
     private int _desiredLane = 1; // 0 = Left, 1 = Middle, 2 = Right
@@ -45,9 +45,9 @@ public class PlayerMotion : MonoBehaviour
     private void Update()
           // Gather input on which lane we should be
     {
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        if (MobileTouchInput.Instance.SwipeLeft)
                 MoveLane(false);
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        if (MobileTouchInput.Instance.SwipeRight)
                 MoveLane(true);
 
         // Calculate where should we be
@@ -73,7 +73,7 @@ public class PlayerMotion : MonoBehaviour
             _verticalVelocity = -0.1f;
            
 
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (MobileTouchInput.Instance.SwipeUp)
             {
                 // jump
                 _verticalVelocity = _jumpForce;
@@ -86,7 +86,7 @@ public class PlayerMotion : MonoBehaviour
             _verticalVelocity -= (_gravity * Time.deltaTime);
 
             // Fast falling mechanic
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (MobileTouchInput.Instance.SwipeDown)
             {
                 _verticalVelocity = -_jumpForce;
             }
