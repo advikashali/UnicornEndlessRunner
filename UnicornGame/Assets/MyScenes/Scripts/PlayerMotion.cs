@@ -61,7 +61,7 @@ public class PlayerMotion : MonoBehaviour
 
         // Calculate our move delta
         Vector3 moveVector = Vector3.zero;
-        moveVector.x = (targetPosition - transform.position).normalized.x * _speed;
+        moveVector.x = (targetPosition - transform.position).x * _speed; ///.normalized.
 
         bool isGrounded = this.isGrounded();
         _anim.SetBool("Grounded", isGrounded);

@@ -13,7 +13,7 @@ public class CameraMotion : MonoBehaviour
         transform.position = lookatTarget.position + offset;
     }
 
-    private void LateUpdate()
+    private void Update()
     {
         Vector3 desiredPosition = lookatTarget.position + offset;
         desiredPosition.x = 0f;
