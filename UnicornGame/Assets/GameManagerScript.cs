@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class GameManagerScript : MonoBehaviour
 {
+    private const int STAR_SCORE_AMOUNT = 5;
 
     public static GameManagerScript Instance { set; get; }
 
@@ -12,14 +13,16 @@ public class GameManagerScript : MonoBehaviour
     private PlayerMotion motor;
 
     //UI
-    public Text scoreText, coinText, modifierText;
-    private float score, coinScore, modifierScore; 
+    public Text scoreText, starText, modifierText;
+    private float score, starScore, modifierScore;
+    private int lastScore;
 
     private void Awake()
     {
         Instance = this;
-        UpdateScores();
+        modifierScore = 1;
         motor = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMotion>();
+        UpdateScores();
     }
 
     private void Update()
@@ -29,13 +32,35 @@ public class GameManagerScript : MonoBehaviour
             isGameStarted = true;
             motor.StartRunning();
         }
+
+       if (isGameStarted)
+        {
+            //increase score
+            lastScore = (int)score; 
+            score += (Time.deltaTime * modifierScore);
+
+            if (lastScore == (int)score)
+            {
+                Debug.Log(lastScore);
+                scoreText.text = score.ToString("0");
+            }
+            
+        }
     }
+
+    public void GetStar()
+    {
+        starScore += STAR_SCORE_AMOUNT;
+        scoreText.text = scoreText.text = score.ToString("0");
+
+    }
+
 
     public void UpdateScores()
     {
         scoreText.text = score.ToString();
-        coinText.text = coinScore.ToString();
-        modifierText.text = modifierScore.ToString();
+        starText.text = starScore.ToString();
+        modifierText.text = "x" + modifierScore.ToString("0.0");
 
     }
 
