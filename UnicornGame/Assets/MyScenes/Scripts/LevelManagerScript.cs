@@ -7,7 +7,7 @@ public class LevelManagerScript : MonoBehaviour
 
 	public static LevelManagerScript Instance { set; get; }
 
-	private const bool SHOW_COLLIDERS = true;
+	private const bool SHOW_COLLIDER = true;
 
 	// Level spawning
 	private const float DISTANCE_BEFORE_SPAWN = 100f;
@@ -20,25 +20,25 @@ public class LevelManagerScript : MonoBehaviour
 	private int currentLevel;
 	private int y1, y2, y3;
 
-	// List of pieces
-	public List<Piece> ramps = new List<Piece>();
-	public List<Piece> longBlocks = new List<Piece>();
-	public List<Piece> jumps = new List<Piece>();
-	public List<Piece> slides = new List<Piece>();
+	// List of props
+	public List<Prop> ramps = new List<Prop>();
+	public List<Prop> longBlocks = new List<Prop>();
+	public List<Prop> jumps = new List<Prop>();
+	public List<Prop> slides = new List<Prop>();
 	[HideInInspector]
-	public List<Piece> pieces = new List<Piece>(); // All pieces in the pool
+	public List<Prop> props = new List<Prop>(); // All props in the pool
 
 	// List of segments
-	public List<Segment> availableSegments = new List<Segment>();
-	public List<Segment> availableTransitions = new List<Segment>();
+	public List<SegmentScript> availableSegments = new List<SegmentScript>();
+	public List<SegmentScript> availableTransitions = new List<SegmentScript>();
 	[HideInInspector]
-	public List<Segment> segments = new List<Segment>();
+	public List<SegmentScript> segments = new List<SegmentScript>();
 
 	// Gameplay
 	private bool isMoving = false;
 
 
-	private void Awake()
+	private void Awake() // mentioned 
 	{
 		cameraContainer = Camera.main.transform;
 		currentSpawnZ = 0;
@@ -50,20 +50,6 @@ public class LevelManagerScript : MonoBehaviour
 		for (int i = 0; i < INITIAL_SEGMENT; i++)
 		{
 			GenerateSegment();
-		}
-	}
-
-	private void Update()
-	{
-		if (currentSpawnZ - cameraContainer.position.z < DISTANCE_BEFORE_SPAWN)
-		{
-			GenerateSegment();
-		}
-
-		if (amountOfActiveSegment >= MAX_SEGMENT_ON_SCREEN)
-		{
-			segments[amountOfActiveSegment - 1].DeSpawn();
-			amountOfActiveSegment--;
 		}
 	}
 
@@ -82,12 +68,27 @@ public class LevelManagerScript : MonoBehaviour
 		}
 	}
 
+	private void Update()
+	{
+		if (currentSpawnZ - cameraContainer.position.z < DISTANCE_BEFORE_SPAWN)
+		{
+			GenerateSegment();
+		}
+
+		if (amountOfActiveSegment >= MAX_SEGMENT_ON_SCREEN)
+		{
+			segments[amountOfActiveSegment - 1].DeSpawn();
+			amountOfActiveSegment--;
+		}
+	}
+
+
 	private void SpawnSegment()
 	{
-		List<Segment> possibleSegments = availableSegments.FindAll(x => x.beginY1 == y1 || x.beginY2 == y2 || x.beginY3 == y3);
+		List<SegmentScript> possibleSegments = availableSegments.FindAll(x => x.beginY1 == y1 || x.beginY2 == y2 || x.beginY3 == y3);
 		int id = Random.Range(0, possibleSegments.Count);
 
-		Segment s = GetSegment(id, false);
+		SegmentScript s = GetSegment(id, false);
 		y1 = s.endY1;
 		y2 = s.endY2;
 		y3 = s.endY3;
@@ -99,13 +100,14 @@ public class LevelManagerScript : MonoBehaviour
 		amountOfActiveSegment++;
 		s.Spawn();
 	}
+
 
 	private void SpawnTransition()
 	{
-		List<Segment> possibleTransition = availableTransitions.FindAll(x => x.beginY1 == y1 || x.beginY2 == y2 || x.beginY3 == y3);
+		List<SegmentScript> possibleTransition = availableTransitions.FindAll(x => x.beginY1 == y1 || x.beginY2 == y2 || x.beginY3 == y3);
 		int id = Random.Range(0, possibleTransition.Count);
 
-		Segment s = GetSegment(id, true);
+		SegmentScript s = GetSegment(id, true);
 		y1 = s.endY1;
 		y2 = s.endY2;
 		y3 = s.endY3;
@@ -118,15 +120,15 @@ public class LevelManagerScript : MonoBehaviour
 		s.Spawn();
 	}
 
-	public Segment GetSegment(int id, bool transition)
+	public SegmentScript GetSegment(int id, bool transition)
 	{
-		Segment s = null;
+		SegmentScript s = null;
 		s = segments.Find(x => x.SegID == id && x.transition == transition && !x.gameObject.activeSelf);
 
 		if (s == null)
 		{
-			GameObject go = Instantiate(transition ? availableTransitions[id].gameObject : availableSegments[id].gameObject) as GameObject;
-			s = go.GetComponent<Segment>();
+			GameObject go = Instantiate((transition) ? availableTransitions[id].gameObject : availableSegments[id].gameObject) as GameObject;
+			s = go.GetComponent<SegmentScript>();
 			s.SegID = id;
 			s.transition = transition;
 
@@ -142,9 +144,9 @@ public class LevelManagerScript : MonoBehaviour
 
 	}
 
-	public Piece GetPiece(PieceType pt, int visualIndex)
+	public Prop GetProp(PropType pt, int visualIndex)
 	{
-		Piece p = pieces.Find(x => x.type == pt && x.visualIndex == visualIndex && !x.gameObject.activeSelf);
+		Prop p = props.Find(x => x.type == pt && x.visualIndex == visualIndex && !x.gameObject.activeSelf);
 
 		if (p == null)
 		{
@@ -152,22 +154,22 @@ public class LevelManagerScript : MonoBehaviour
 
 			switch (pt)
 			{
-				case PieceType.ramp:
+				case PropType.ramp:
 					go = ramps[visualIndex].gameObject;
 					break;
-				case PieceType.longBlock:
+				case PropType.longBlock:
 					go = longBlocks[visualIndex].gameObject;
 					break;
-				case PieceType.jump:
+				case PropType.jump:
 					go = jumps[visualIndex].gameObject;
 					break;
-				case PieceType.slide:
+				case PropType.slide:
 					go = slides[visualIndex].gameObject;
 					break;
 			}
 			go = Instantiate(go);
-			p = go.GetComponent<Piece>();
-			pieces.Add(p);
+			p = go.GetComponent<Prop>();
+			props.Add(p);
 		}
 
 		return p;
