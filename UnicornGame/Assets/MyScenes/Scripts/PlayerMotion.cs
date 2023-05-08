@@ -58,7 +58,6 @@ public class PlayerMotion : MonoBehaviour
         }
 
 
-
         if (MobileTouchInput.Instance.SwipeLeft)
                 MoveLane(false);
         if (MobileTouchInput.Instance.SwipeRight)
@@ -159,6 +158,7 @@ public class PlayerMotion : MonoBehaviour
     {
         _anim.SetTrigger("Death");
         isRunning = false;
+        GameManagerScript.Instance.IsDead = true; 
     }
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
