@@ -9,6 +9,7 @@ public class GameManagerScript : MonoBehaviour
 
     public static GameManagerScript Instance { set; get; }
 
+    public bool IsDead { set; get; }
     private bool isGameStarted = false;
     private PlayerMotion motor;
 
@@ -36,7 +37,7 @@ public class GameManagerScript : MonoBehaviour
             motor.StartRunning();
         }
 
-        if (isGameStarted)
+        if (isGameStarted && !IsDead)
         {
             //increase score
             lastScore = (int)score;

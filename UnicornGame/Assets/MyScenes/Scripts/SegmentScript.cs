@@ -12,21 +12,31 @@ public class SegmentScript : MonoBehaviour
 	public int beginY1, beginY2, beginY3;
 	public int endY1, endY2, endY3;
 
-	public Prop[] props;
+	public PropSpawner[] props;
 
 	private void Awake()
 	{
-		props = gameObject.GetComponentsInChildren<Prop>();
+		props = gameObject.GetComponentsInChildren<PropSpawner>();
 	}
 
 	public void Spawn()
 	{
 		gameObject.SetActive(true);
+
+		for (int i = 0; i < props.Length; i++)
+        {
+			props[i].Spawn();
+        }
 	}
 
 	public void DeSpawn()
 	{
 		gameObject.SetActive(false);
+
+		for (int i = 0; i < props.Length; i++)
+		{
+			props[i].DeSpawn();
+		}
 	}
 
 }

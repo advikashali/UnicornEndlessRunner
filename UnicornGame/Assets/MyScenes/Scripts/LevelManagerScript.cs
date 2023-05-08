@@ -53,6 +53,7 @@ public class LevelManagerScript : MonoBehaviour
 		}
 	}
 
+
 	private void GenerateSegment()
 	{
 		SpawnSegment();
