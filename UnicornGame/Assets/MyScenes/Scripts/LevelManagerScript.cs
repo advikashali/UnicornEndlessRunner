@@ -10,12 +10,12 @@ public class LevelManagerScript : MonoBehaviour
 	private const bool SHOW_COLLIDERS = true;
 
 	// Level spawning
-	private const float DISTANCE_BEFORE_SPWAN = 100f;
+	private const float DISTANCE_BEFORE_SPAWN = 100f;
 	private const int INITIAL_SEGMENT = 10;
 	private const int MAX_SEGMENT_ON_SCREEN = 15;
 	private Transform cameraContainer;
 	private int amountOfActiveSegment;
-	private int continiousSegments;
+	private int continuousSegments;
 	private int currentSpawnZ;
 	private int currentLevel;
 	private int y1, y2, y3;
@@ -30,12 +30,12 @@ public class LevelManagerScript : MonoBehaviour
 
 	// List of segments
 	public List<Segment> availableSegments = new List<Segment>();
-	public List<Segment> availableTransition = new List<Segment>();
+	public List<Segment> availableTransitions = new List<Segment>();
 	[HideInInspector]
 	public List<Segment> segments = new List<Segment>();
 
 	// Gameplay
-	private bool isMoving;
+	private bool isMoving = false;
 
 
 	private void Awake()
@@ -55,7 +55,7 @@ public class LevelManagerScript : MonoBehaviour
 
 	private void Update()
 	{
-		if (currentSpawnZ - cameraContainer.position.z < DISTANCE_BEFORE_SPWAN)
+		if (currentSpawnZ - cameraContainer.position.z < DISTANCE_BEFORE_SPAWN)
 		{
 			GenerateSegment();
 		}
@@ -71,14 +71,14 @@ public class LevelManagerScript : MonoBehaviour
 	{
 		SpawnSegment();
 
-		if (Random.Range(0f, 1f) < (continiousSegments * 0.25f))
+		if (Random.Range(0f, 1f) < (continuousSegments * 0.25f))
 		{
 			SpawnTransition();
-			continiousSegments = 0;
+			continuousSegments = 0;
 		}
 		else
 		{
-			continiousSegments++;
+			continuousSegments++;
 		}
 	}
 
@@ -102,7 +102,7 @@ public class LevelManagerScript : MonoBehaviour
 
 	private void SpawnTransition()
 	{
-		List<Segment> possibleTransition = availableTransition.FindAll(x => x.beginY1 == y1 || x.beginY2 == y2 || x.beginY3 == y3);
+		List<Segment> possibleTransition = availableTransitions.FindAll(x => x.beginY1 == y1 || x.beginY2 == y2 || x.beginY3 == y3);
 		int id = Random.Range(0, possibleTransition.Count);
 
 		Segment s = GetSegment(id, true);
@@ -125,7 +125,7 @@ public class LevelManagerScript : MonoBehaviour
 
 		if (s == null)
 		{
-			GameObject go = Instantiate(transition ? availableTransition[id].gameObject : availableSegments[id].gameObject) as GameObject;
+			GameObject go = Instantiate(transition ? availableTransitions[id].gameObject : availableSegments[id].gameObject) as GameObject;
 			s = go.GetComponent<Segment>();
 			s.SegID = id;
 			s.transition = transition;
