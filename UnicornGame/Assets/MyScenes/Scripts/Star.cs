@@ -17,7 +17,6 @@ public class Star : MonoBehaviour
 		{
 			GameManagerScript.Instance.GetStar();
 			animator.SetTrigger("Collected");
-			Destroy(gameObject, 1.5f);
 		}
 	}
 }
