@@ -6,18 +6,23 @@ public class Star : MonoBehaviour
 {
 	private Animator animator;
 
-	private void Start()
+	private void Awake()
 	{
 		animator = GetComponent<Animator>();
 	}
 
-	private void OnTriggerEnter(Collider other)
+    private void OnEnable()
+    {
+		animator.SetTrigger("Spawn");
+
+    }
+    private void OnTriggerEnter(Collider other)
 	{
 		if (other.tag == "Player")
 		{
 			GameManagerScript.Instance.GetStar();
 			animator.SetTrigger("Collected");
-			Destroy(gameObject, 1.5f);
+			//Destroy(gameObject, 1.5f);
 		}
 	}
 }

@@ -548,7 +548,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6228789837566987194, guid: cbce30f4aa14d4c58a71cc9eb1da7f1d, type: 3}
       propertyPath: m_Name
-      value: CoinLane5
+      value: StarLane5
       objectReference: {fileID: 0}
     - target: {fileID: 6243624471703313269, guid: cbce30f4aa14d4c58a71cc9eb1da7f1d, type: 3}
       propertyPath: m_RootOrder

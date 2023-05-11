@@ -39,6 +39,7 @@ public class GameManagerScript : MonoBehaviour
         {
             isGameStarted = true;
             motion.StartRunning();
+            FindObjectOfType<GlacierSpawner>().IsScrolling = true;
         }
 
         if (isGameStarted && !IsDead)
@@ -80,6 +81,7 @@ public class GameManagerScript : MonoBehaviour
     public void OnGameOver()
     {
         IsDead = true;
+        FindObjectOfType<GlacierSpawner>().IsScrolling = true;
         gameOverScoreText.text = score.ToString("0");
         gameOverStarText.text = starScore.ToString("0");
         gameOverAnim.SetTrigger("Dead");

@@ -39,11 +39,10 @@ public class StarSpawner : MonoBehaviour
             }
 
         }
-
         
     }
 
-    private void OnDisable()
+    private void OnDisable()  //$$ 
     {
         foreach (GameObject go in stars)
             go.SetActive(false);
