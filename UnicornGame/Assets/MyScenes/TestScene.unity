@@ -865,6 +865,7 @@ GameObject:
   - component: {fileID: 1704708338}
   - component: {fileID: 1704708337}
   - component: {fileID: 1704708336}
+  - component: {fileID: 1704708340}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
@@ -892,7 +893,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c5951b4f3b0d2412fa097b52b2b71412, type: 2}
+  - {fileID: 2100000, guid: a2b8671c1d9e248f5aee2062f077cd87, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -951,6 +952,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1704708340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1704708335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f50711bf4c8c4577868700a6f36d7e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2031866617
 GameObject:
   m_ObjectHideFlags: 0
@@ -996,6 +1009,7 @@ MonoBehaviour:
   - {fileID: 2632616814307329501, guid: 0ef8c63004e364491ac77c026c36cb82, type: 3}
   - {fileID: 4542777052650592696, guid: eeb61963311fd43df88f98d953156415, type: 3}
   - {fileID: 3906685967909101332, guid: 0955c0bc747eb4beca74ea8bad99388d, type: 3}
+  - {fileID: 4542777052650592696, guid: eeb61963311fd43df88f98d953156415, type: 3}
   availableTransitions:
   - {fileID: 5980870795711357116, guid: 131a91f28892348d1838d8b7f67ece08, type: 3}
   segments: []

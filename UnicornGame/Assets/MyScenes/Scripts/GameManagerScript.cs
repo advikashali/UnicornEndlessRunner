@@ -18,6 +18,10 @@ public class GameManagerScript : MonoBehaviour
     private float score, starScore, modifierScore;
     private int lastScore;
 
+    //Game over menu
+    public Animator gameOverAnim;
+    public Text gameOverScoreText, gameOverStarText;
+
     private void Awake()
     {
         Instance = this;
@@ -66,5 +70,18 @@ public class GameManagerScript : MonoBehaviour
         modifierScore = 1.0f + modifierAmount;
 
         modifierText.text = "x" + modifierScore.ToString("0.0");
+    }
+
+    public void OnPLayButton()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Game");
+    }
+
+    public void OnGameOver()
+    {
+        IsDead = true;
+        gameOverScoreText.text = score.ToString("0");
+        gameOverStarText.text = starScore.ToString("0");
+        gameOverAnim.SetTrigger("Dead");
     }
 }

@@ -5,9 +5,9 @@ using UnityEngine;
 public class LevelManagerScript : MonoBehaviour
 {
 
-	public static LevelManagerScript Instance { set; get; }
+	public bool SHOW_COLLIDER = true; //!! 
 
-	public bool SHOW_COLLIDER = true;
+	public static LevelManagerScript Instance { set; get; }
 
 	// Level spawning
 	private const float DISTANCE_BEFORE_SPAWN = 100f; //how much distance player will see before spawning more

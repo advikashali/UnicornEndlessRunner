@@ -12,7 +12,6 @@ public class FollowThePlayer : MonoBehaviour
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
-    // Update is called once per frame
     private void Update()
     {
         transform.position = Vector3.forward * playerTransform.position.z;

@@ -152,7 +152,7 @@ public class PlayerMotion : MonoBehaviour
     {
         _anim.SetTrigger("Death");
         isRunning = false;
-        GameManagerScript.Instance.IsDead = true;
+        GameManagerScript.Instance.OnGameOver();
     }
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
