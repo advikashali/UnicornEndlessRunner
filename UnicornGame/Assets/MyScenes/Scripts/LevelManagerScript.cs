@@ -7,17 +7,18 @@ public class LevelManagerScript : MonoBehaviour
 
 	public static LevelManagerScript Instance { set; get; }
 
-	private const bool SHOW_COLLIDER = true;
+	public bool SHOW_COLLIDER = true;
 
 	// Level spawning
-	private const float DISTANCE_BEFORE_SPAWN = 100f;
-	private const int INITIAL_SEGMENT = 10;
-	private const int MAX_SEGMENT_ON_SCREEN = 15;
+	private const float DISTANCE_BEFORE_SPAWN = 100f; //how much distance player will see before spawning more
+	private const int INITIAL_SEGMENT = 10; //how many segments before game starts 
+	private const int INITIAL_TRANSITION_SEGMENTS = 2; 
+	private const int MAX_SEGMENT_ON_SCREEN = 15; //how many segments until its time to despawn
 	private Transform cameraContainer;
 	private int amountOfActiveSegment;
-	private int continuousSegments;
+	private int continuousSegment; //for spawning transition segments 
 	private int currentSpawnZ;
-	private int currentLevel;
+	//private int currentlevel; //grey..
 	private int y1, y2, y3;
 
 	// List of props
@@ -35,46 +36,32 @@ public class LevelManagerScript : MonoBehaviour
 	public List<SegmentScript> segments = new List<SegmentScript>();
 
 	// Gameplay
-	private bool isMoving = false;
+	private bool ismoving = false;
 
 
-	private void Awake() // mentioned 
+	private void Awake() 
 	{
+		Instance = this;
 		cameraContainer = Camera.main.transform;
 		currentSpawnZ = 0;
-		currentLevel = 0;
+		//currentlevel = 0;
 	}
 
-	private void Start()
+	private void Start() 
 	{
 		for (int i = 0; i < INITIAL_SEGMENT; i++)
-		{
-			GenerateSegment();
-		}
-	}
-
-
-	private void GenerateSegment()
-	{
-		SpawnSegment();
-
-		if (Random.Range(0f, 1f) < (continuousSegments * 0.25f))
-		{
-			SpawnTransition();
-			continuousSegments = 0;
-		}
-		else
-		{
-			continuousSegments++;
-		}
+			if (i < INITIAL_TRANSITION_SEGMENTS)
+				SpawnTransition();
+			else
+				GeneratesSegment();
+		
 	}
 
 	private void Update()
 	{
 		if (currentSpawnZ - cameraContainer.position.z < DISTANCE_BEFORE_SPAWN)
-		{
-			GenerateSegment();
-		}
+		GeneratesSegment();
+		
 
 		if (amountOfActiveSegment >= MAX_SEGMENT_ON_SCREEN)
 		{
@@ -84,13 +71,28 @@ public class LevelManagerScript : MonoBehaviour
 	}
 
 
+	private void GeneratesSegment()
+	{
+		SpawnSegment();
+
+		if (Random.Range(0f, 1f) < (continuousSegment * 0.25f))
+		{
+			SpawnTransition();
+			continuousSegment = 0;
+		}
+		else
+		{
+			continuousSegment++;
+		}
+	}
+
 	private void SpawnSegment()
 	{
-		List<SegmentScript> possibleSegments = availableSegments.FindAll(x => x.beginY1 == y1 || x.beginY2 == y2 || x.beginY3 == y3);
-		int id = Random.Range(0, possibleSegments.Count);
+		List<SegmentScript> possibleSeg = availableSegments.FindAll(x => x.beginY1 == y1 || x.beginY2 == y2 || x.beginY3 == y3);
+		int id = Random.Range(0, possibleSeg.Count);
 
 		SegmentScript s = GetSegment(id, false);
-		y1 = s.endY1;
+		y1 = s.endY1; 
 		y2 = s.endY2;
 		y3 = s.endY3;
 
@@ -102,11 +104,10 @@ public class LevelManagerScript : MonoBehaviour
 		s.Spawn();
 	}
 
-
 	private void SpawnTransition()
 	{
-		List<SegmentScript> possibleTransition = availableTransitions.FindAll(x => x.beginY1 == y1 || x.beginY2 == y2 || x.beginY3 == y3);
-		int id = Random.Range(0, possibleTransition.Count);
+		List<SegmentScript> possibleTransitions = availableTransitions.FindAll(x => x.beginY1 == y1 || x.beginY2 == y2 || x.beginY3 == y3);
+		int id = Random.Range(0, possibleTransitions.Count);
 
 		SegmentScript s = GetSegment(id, true);
 		y1 = s.endY1;
@@ -120,6 +121,7 @@ public class LevelManagerScript : MonoBehaviour
 		amountOfActiveSegment++;
 		s.Spawn();
 	}
+
 
 	public SegmentScript GetSegment(int id, bool transition)
 	{
@@ -153,24 +155,36 @@ public class LevelManagerScript : MonoBehaviour
 		{
 			GameObject go = null;
 
-			switch (pt)
-			{
-				case PropType.ramp:
-					go = ramps[visualIndex].gameObject;
-					break;
-				case PropType.longBlock:
-					go = longBlocks[visualIndex].gameObject;
-					break;
-				case PropType.jump:
-					go = jumps[visualIndex].gameObject;
-					break;
-				case PropType.slide:
-					go = slides[visualIndex].gameObject;
-					break;
-			}
+			if (pt == PropType.ramp)
+				go = ramps[visualIndex].gameObject;
+			else if (pt == PropType.longBlock)
+				go = longBlocks[visualIndex].gameObject;
+			else if (pt == PropType.jump)
+				go = jumps[visualIndex].gameObject;
+			else if (pt == PropType.slide)
+				go = slides[visualIndex].gameObject;
+
 			go = Instantiate(go);
 			p = go.GetComponent<Prop>();
 			props.Add(p);
+		
+
+
+			//switch (pt)
+			//{
+				//case PropType.ramp:
+					//go = ramps[visualIndex].gameObject;
+					//break;
+				//case PropType.longBlock:
+					//go = longBlocks[visualIndex].gameObject;
+					//break;
+				//case PropType.jump:
+					//go = jumps[visualIndex].gameObject;
+					//break;
+				//case PropType.slide:
+					//go = slides[visualIndex].gameObject;
+					//break;
+			
 		}
 
 		return p;

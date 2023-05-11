@@ -11,7 +11,7 @@ public class GameManagerScript : MonoBehaviour
 
     public bool IsDead { set; get; }
     private bool isGameStarted = false;
-    private PlayerMotion motor;
+    private PlayerMotion motion;
 
     //UI
     public Text scoreText, starText, modifierText;
@@ -22,7 +22,7 @@ public class GameManagerScript : MonoBehaviour
     {
         Instance = this;
         modifierScore = 1;
-        motor = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMotion>();
+        motion = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMotion>();
 
         modifierText.text = "x" + modifierScore.ToString("0.0");
         starText.text = starScore.ToString("0");
@@ -34,7 +34,7 @@ public class GameManagerScript : MonoBehaviour
         if (MobileTouchInput.Instance.Tap && !isGameStarted)
         {
             isGameStarted = true;
-            motor.StartRunning();
+            motion.StartRunning();
         }
 
         if (isGameStarted && !IsDead)
@@ -45,7 +45,7 @@ public class GameManagerScript : MonoBehaviour
 
             if (lastScore != (int)score)
             {
-                Debug.Log(lastScore);
+                //Debug.Log(lastScore);
                 scoreText.text = score.ToString("0");
             }
 

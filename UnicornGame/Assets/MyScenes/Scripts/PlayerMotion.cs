@@ -7,14 +7,10 @@ using UnityEngine;
 public class PlayerMotion : MonoBehaviour
 {
 
-    private const float LANE_DISTANCE = 2.0f;
+    private const float LANE_DISTANCE = 2.5f;
     private const float TURN_SPEED = 0.05f;
-    /*
-    private const float LANE_DISTANCE = 2.0f;
-    private const float TURN_SPEED = 0.5f;
-   */
+   
     private bool isRunning = false;
-    
 
     // Animation
     private Animator _anim;
@@ -41,15 +37,15 @@ public class PlayerMotion : MonoBehaviour
         _speed = _originalSpeed;
     }
 
-    
+
     private void Update()
-          // Gather input on which lane we should be
+    // Gather input on which lane unicorn should be
     {
 
         if (!isRunning)
             return;
 
-        if(Time.time - _speedIncreaseLastTick > _speedIncreaseTime)
+        if (Time.time - _speedIncreaseLastTick > _speedIncreaseTime)
         {
             _speedIncreaseLastTick = Time.time;
             _speed += _speedIncreaseAmount;
@@ -59,32 +55,32 @@ public class PlayerMotion : MonoBehaviour
 
 
         if (MobileTouchInput.Instance.SwipeLeft)
-                MoveLane(false);
+            MoveLane(false);
         if (MobileTouchInput.Instance.SwipeRight)
-                MoveLane(true);
+            MoveLane(true);
 
-        // Calculate where should we be
+        // Calculate where should unicorn be
 
         Vector3 targetPosition = transform.position.z * Vector3.forward;
         if (_desiredLane == 0)
-        
-                targetPosition += Vector3.left * LANE_DISTANCE;
-        else if(_desiredLane == 2)
-                targetPosition += Vector3.right * LANE_DISTANCE;
 
-        // Calculate our move delta
+            targetPosition += Vector3.left * LANE_DISTANCE;
+        else if (_desiredLane == 2)
+            targetPosition += Vector3.right * LANE_DISTANCE;
+
+        // Calculate unicorn move delta
         Vector3 moveVector = Vector3.zero;
         moveVector.x = (targetPosition - transform.position).x * _speed; ///.normalized.
 
         bool isGrounded = this.isGrounded();
         _anim.SetBool("Grounded", isGrounded);
-        
+
 
         // Calculate Y
         if (this.isGrounded()) // if grounded // GOTTA DOUBLE CHECK THIS !!!!!!!!
         {
             _verticalVelocity = -0.1f;
-           
+
 
             if (MobileTouchInput.Instance.SwipeUp)
             {
@@ -92,7 +88,7 @@ public class PlayerMotion : MonoBehaviour
                 _verticalVelocity = _jumpForce;
                 _anim.SetTrigger("Jump");
             }
-            
+
         }
         else
         {
@@ -113,7 +109,7 @@ public class PlayerMotion : MonoBehaviour
         // Move Unicorn
         _controller.Move(moveVector * Time.deltaTime);
 
-        //Rotate the pengu to where he is going
+        //Rotate the unicorn to where it is going
         Vector3 dir = _controller.velocity;
 
         if (dir != Vector3.zero)
@@ -131,9 +127,7 @@ public class PlayerMotion : MonoBehaviour
         _desiredLane += (goingRight) ? 1 : -1;
         _desiredLane = Mathf.Clamp(_desiredLane, 0, 2);
 
-
     }
-
 
     private bool isGrounded()
     {
@@ -158,7 +152,7 @@ public class PlayerMotion : MonoBehaviour
     {
         _anim.SetTrigger("Death");
         isRunning = false;
-        GameManagerScript.Instance.IsDead = true; 
+        GameManagerScript.Instance.IsDead = true;
     }
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
@@ -171,151 +165,5 @@ public class PlayerMotion : MonoBehaviour
         }
     }
 
-
-
-
-
-
-    /*
-    if (!isRunning)
-        return;
-
-    // speed modifier
-    if ((Time.time - _speedIncreaseLastTick) > _speedIncreaseTime)
-    {
-        _speedIncreaseLastTick = Time.time;
-        _speed += _speedIncreaseAmount;
-        GameManager.Instance.UpdateModifier(_speed - _originalSpeed);
-    }
-
-    // Gather input on which lane we should be
-    if (MobileInput.Instance.SwipeLeft)
-    {
-        _MoveLane(false);
-    }
-    if (MobileInput.Instance.SwipeRight)
-    {
-        _MoveLane(true);
-    }
-
-    // Calculate where should we be
-    Vector3 targetPosition = transform.position.z * Vector3.forward;
-    switch (_desiredLane)
-    {
-        case 0:
-            targetPosition += Vector3.left * LANE_DISTANCE;
-            break;
-        case 2:
-            targetPosition += Vector3.right * LANE_DISTANCE;
-            break;
-    }
-
-    // Calculate our move delta
-    Vector3 moveVector = Vector3.zero;
-    moveVector.x = (targetPosition - transform.position).normalized.x * _speed;
-
-    bool isGrounded = _IsGrounded();
-    _anim.SetBool("Grounded", isGrounded);
-
-    // Calculate Y
-    if (_IsGrounded()) // is grounded
-    {
-        _verticalVelocity = -0.1f;
-
-        if (MobileInput.Instance.SwipeUp)
-        {
-            _verticalVelocity = _jumpForce;
-            _anim.SetTrigger("Jump");
-        }
-        else if (MobileInput.Instance.SwipeDown)
-        {
-            _StartSliding();
-        }
-    }
-    else
-    {
-        _verticalVelocity -= (_gravity * Time.deltaTime);
-
-        if (MobileInput.Instance.SwipeDown)
-        {
-            _verticalVelocity = -_jumpForce;
-        }
-    }
-
-    moveVector.y = _verticalVelocity;
-    moveVector.z = _speed;
-
-    // Move the pengu
-    _contorller.Move(moveVector * Time.deltaTime);
-
-    // Rotate the pengu to where he is going
-    Vector3 dir = _contorller.velocity;
-
-    if (dir != Vector3.zero)
-    {
-        dir.y = 0f;
-        transform.forward = Vector3.Lerp(transform.forward, dir, TURN_SPEED);
-    }
-    */
-
-
-    /*
-    private void _MoveLane(bool goingRight)
-    {
-        _desiredLane += (goingRight) ? 1 : -1;
-        _desiredLane = Mathf.Clamp(_desiredLane, 0, 2);
-    }
-
-    private void _StartSliding()
-    {
-        _anim.SetBool("Sliding", true);
-        _contorller.height *= 0.5f;
-        _contorller.center *= 0.5f;
-        Invoke("_StopSliding", 1f);
-    }
-
-    private void _StopSliding()
-    {
-        _contorller.height *= 2f;
-        _contorller.center *= 2f;
-        _anim.SetBool("Sliding", false);
-    }
-
-    private bool _IsGrounded()
-    {
-        Ray groundRay = new Ray(
-            new Vector3(
-                _contorller.bounds.center.x,
-                _contorller.bounds.center.y - _contorller.bounds.extents.y + 0.2f,
-                _contorller.bounds.center.z),
-            Vector3.down);
-        Debug.DrawRay(groundRay.origin, groundRay.direction, Color.cyan, 1f);
-
-        return Physics.Raycast(groundRay, 0.3f);
-    }
-
-    public void StartRunning()
-    {
-        isRunning = true;
-        _anim.SetTrigger("StartRunnig");
-    }
-
-    private void _Crash()
-    {
-        _anim.SetTrigger("Death");
-        isRunning = false;
-    }
-
-    private void OnControllerColliderHit(ControllerColliderHit hit)
-    {
-        switch (hit.gameObject.tag)
-        {
-            case "Obstacle":
-                _Crash();
-                break;
-        }
-    } 
-
-    */
 }
 
