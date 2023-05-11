@@ -91,5 +91,15 @@ public class GameManagerScript : MonoBehaviour
         gameOverScoreText.text = score.ToString("0");
         gameOverStarText.text = starScore.ToString("0");
         gameOverAnim.SetTrigger("Dead");
+        gameCanvas.SetTrigger("Hide");
+
+        //check if this is highscore
+        if(score > PlayerPrefs.GetInt("Highscore"))
+        {
+            float s = score;
+                if (s % 1 == 0)
+                s += 1;
+            PlayerPrefs.SetInt("Highscore", (int)s);
+        }
     }
 }
