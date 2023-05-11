@@ -14,7 +14,7 @@ public class GameManagerScript : MonoBehaviour
     private PlayerMotion motion;
 
     //UI
-    public Animator gameCanvas;
+    public Animator gameCanvas, menuAnimator, starAnimator;
     public Text scoreText, starText, modifierText;
     private float score, starScore, modifierScore;
     private int lastScore;
@@ -43,6 +43,8 @@ public class GameManagerScript : MonoBehaviour
             FindObjectOfType<GlacierSpawner>().IsScrolling = true;
             FindObjectOfType<CameraMotion>().IsMoving = true; //a bit expensive but since it's only activated once it's fine
             gameCanvas.SetTrigger("Show");
+            menuAnimator.SetTrigger("Hide");
+
         }
 
         if (isGameStarted && !IsDead)
@@ -62,6 +64,7 @@ public class GameManagerScript : MonoBehaviour
 
     public void GetStar()
     {
+        starAnimator.SetTrigger("Collect");
         starScore++;
         starText.text = starScore.ToString("0");
         score += STAR_SCORE_AMOUNT;
