@@ -590,7 +590,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1552348044248702, guid: b19ea90bd7557fd45b7b6c2ef1f48d48, type: 3}
       propertyPath: m_Name
-      value: Glacier2 (2)
+      value: Glacier10
       objectReference: {fileID: 0}
     - target: {fileID: 4156834129438196, guid: b19ea90bd7557fd45b7b6c2ef1f48d48, type: 3}
       propertyPath: m_RootOrder
@@ -670,7 +670,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1245442662436760, guid: 65b7fa35b7b044648ad4a410253e6212, type: 3}
       propertyPath: m_Name
-      value: Glacier3 (3)
+      value: Glacier12
       objectReference: {fileID: 0}
     - target: {fileID: 4255967502796016, guid: 65b7fa35b7b044648ad4a410253e6212, type: 3}
       propertyPath: m_RootOrder
@@ -832,7 +832,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1245442662436760, guid: 65b7fa35b7b044648ad4a410253e6212, type: 3}
       propertyPath: m_Name
-      value: Glacier3 (2)
+      value: Glacier8
       objectReference: {fileID: 0}
     - target: {fileID: 4255967502796016, guid: 65b7fa35b7b044648ad4a410253e6212, type: 3}
       propertyPath: m_RootOrder
@@ -1351,7 +1351,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1496565673490738, guid: afc10fca670497c4b800e1ba4e0cf767, type: 3}
       propertyPath: m_Name
-      value: Glacier1 (6)
+      value: Glacier15
       objectReference: {fileID: 0}
     - target: {fileID: 4932520384075246, guid: afc10fca670497c4b800e1ba4e0cf767, type: 3}
       propertyPath: m_RootOrder
@@ -2942,7 +2942,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1496565673490738, guid: afc10fca670497c4b800e1ba4e0cf767, type: 3}
       propertyPath: m_Name
-      value: Glacier1 (3)
+      value: Glacier9
       objectReference: {fileID: 0}
     - target: {fileID: 4932520384075246, guid: afc10fca670497c4b800e1ba4e0cf767, type: 3}
       propertyPath: m_RootOrder
@@ -3326,7 +3326,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1496565673490738, guid: afc10fca670497c4b800e1ba4e0cf767, type: 3}
       propertyPath: m_Name
-      value: Glacier1 (1)
+      value: Glacier4
       objectReference: {fileID: 0}
     - target: {fileID: 4932520384075246, guid: afc10fca670497c4b800e1ba4e0cf767, type: 3}
       propertyPath: m_RootOrder
@@ -3555,6 +3555,7 @@ RectTransform:
   - {fileID: 1015898547}
   - {fileID: 737176298}
   - {fileID: 695802425}
+  - {fileID: 1913427623}
   m_Father: {fileID: 893527283}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3581,7 +3582,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1245442662436760, guid: 65b7fa35b7b044648ad4a410253e6212, type: 3}
       propertyPath: m_Name
-      value: Glacier3 (1)
+      value: Glacier6
       objectReference: {fileID: 0}
     - target: {fileID: 4255967502796016, guid: 65b7fa35b7b044648ad4a410253e6212, type: 3}
       propertyPath: m_RootOrder
@@ -3648,7 +3649,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1552348044248702, guid: b19ea90bd7557fd45b7b6c2ef1f48d48, type: 3}
       propertyPath: m_Name
-      value: Glacier2 (4)
+      value: Glacier16
       objectReference: {fileID: 0}
     - target: {fileID: 4156834129438196, guid: b19ea90bd7557fd45b7b6c2ef1f48d48, type: 3}
       propertyPath: m_RootOrder
@@ -3800,7 +3801,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1496565673490738, guid: afc10fca670497c4b800e1ba4e0cf767, type: 3}
       propertyPath: m_Name
-      value: Glacier1 (2)
+      value: Glacier7
       objectReference: {fileID: 0}
     - target: {fileID: 4932520384075246, guid: afc10fca670497c4b800e1ba4e0cf767, type: 3}
       propertyPath: m_RootOrder
@@ -3947,7 +3948,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1552348044248702, guid: b19ea90bd7557fd45b7b6c2ef1f48d48, type: 3}
       propertyPath: m_Name
-      value: Glacier2 (3)
+      value: Glacier14
       objectReference: {fileID: 0}
     - target: {fileID: 4156834129438196, guid: b19ea90bd7557fd45b7b6c2ef1f48d48, type: 3}
       propertyPath: m_RootOrder
@@ -4186,20 +4187,20 @@ Transform:
   - {fileID: 138830552}
   - {fileID: 1971077324}
   - {fileID: 1888777265}
-  - {fileID: 376150703}
   - {fileID: 882457545}
-  - {fileID: 542422831}
+  - {fileID: 376150703}
   - {fileID: 1613813047}
-  - {fileID: 1164769171}
+  - {fileID: 542422831}
   - {fileID: 898902446}
-  - {fileID: 1945532997}
+  - {fileID: 1164769171}
   - {fileID: 501679067}
-  - {fileID: 625649742}
+  - {fileID: 1945532997}
   - {fileID: 451647999}
-  - {fileID: 1528212792}
+  - {fileID: 625649742}
   - {fileID: 348490261}
-  - {fileID: 2130197699}
+  - {fileID: 1528212792}
   - {fileID: 1336005561}
+  - {fileID: 2130197699}
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4213,7 +4214,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1552348044248702, guid: b19ea90bd7557fd45b7b6c2ef1f48d48, type: 3}
       propertyPath: m_Name
-      value: Glacier2 (1)
+      value: Glacier5
       objectReference: {fileID: 0}
     - target: {fileID: 4156834129438196, guid: b19ea90bd7557fd45b7b6c2ef1f48d48, type: 3}
       propertyPath: m_RootOrder
@@ -4397,6 +4398,86 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4932520384075246, guid: afc10fca670497c4b800e1ba4e0cf767, type: 3}
   m_PrefabInstance: {fileID: 605615236}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1913427622
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1913427623}
+  - component: {fileID: 1913427624}
+  - component: {fileID: 1913427625}
+  m_Layer: 5
+  m_Name: Highscore
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1913427623
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1913427622}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1418415234}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -141.8, y: -399.06036}
+  m_SizeDelta: {x: 181.7, y: 91.81}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &1913427624
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1913427622}
+  m_CullTransparentMesh: 1
+--- !u!114 &1913427625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1913427622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: f6683b7c5c2804aaa920d7411e558853, type: 3}
+    m_FontSize: 66
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 66
+    m_Alignment: 8
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: x
 --- !u!1001 &1915191938
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4407,7 +4488,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1496565673490738, guid: afc10fca670497c4b800e1ba4e0cf767, type: 3}
       propertyPath: m_Name
-      value: Glacier1 (4)
+      value: Glacier11
       objectReference: {fileID: 0}
     - target: {fileID: 4932520384075246, guid: afc10fca670497c4b800e1ba4e0cf767, type: 3}
       propertyPath: m_RootOrder
@@ -4470,7 +4551,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1496565673490738, guid: afc10fca670497c4b800e1ba4e0cf767, type: 3}
       propertyPath: m_Name
-      value: Glacier1 (5)
+      value: Glacier13
       objectReference: {fileID: 0}
     - target: {fileID: 4932520384075246, guid: afc10fca670497c4b800e1ba4e0cf767, type: 3}
       propertyPath: m_RootOrder
@@ -4778,6 +4859,7 @@ MonoBehaviour:
   scoreText: {fileID: 297388210}
   starText: {fileID: 851429355}
   modifierText: {fileID: 1097254931}
+  highscoreText: {fileID: 1913427625}
   gameOverAnim: {fileID: 2017704116}
   gameOverScoreText: {fileID: 977004557}
   gameOverStarText: {fileID: 1043122724}

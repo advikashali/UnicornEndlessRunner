@@ -15,7 +15,7 @@ public class GameManagerScript : MonoBehaviour
 
     //UI
     public Animator gameCanvas, menuAnimator, starAnimator;
-    public Text scoreText, starText, modifierText;
+    public Text scoreText, starText, modifierText, highscoreText;
     private float score, starScore, modifierScore;
     private int lastScore;
 
@@ -32,6 +32,8 @@ public class GameManagerScript : MonoBehaviour
         modifierText.text = "x" + modifierScore.ToString("0.0");
         starText.text = starScore.ToString("0");
         scoreText.text = scoreText.text = score.ToString("0");
+
+        highscoreText.text = PlayerPrefs.GetInt("Highscore").ToString();
     }
 
     private void Update()
