@@ -83,7 +83,7 @@ public class GameManagerScript : MonoBehaviour
 
     public void OnPLayButton()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Game");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("TestScene");
     }
 
     public void OnGameOver()

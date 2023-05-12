@@ -24,7 +24,7 @@ public class PlayerMotion : MonoBehaviour
 
     // Speed Modifier
     private float _originalSpeed = 7.0f;
-    private float _speed = 10.0f; //7
+    private float _speed = 20.0f; //7
     private float _speedIncreaseLastTick;
     private float _speedIncreaseTime = 2.5f;
     private float _speedIncreaseAmount = 0.1f;
