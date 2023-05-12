@@ -12,7 +12,7 @@ public class LevelManagerScript : MonoBehaviour
 	// Level spawning
 	private const float DISTANCE_BEFORE_SPAWN = 100f; //how much distance player will see before spawning more
 	private const int INITIAL_SEGMENT = 10; //how many segments before game starts 
-	private const int INITIAL_TRANSITION_SEGMENTS = 2; 
+	private const int INITIAL_TRANSITION_SEGMENTS = 1; 
 	private const int MAX_SEGMENT_ON_SCREEN = 15; //how many segments until its time to despawn
 	private Transform cameraContainer;
 	private int amountOfActiveSegment;
